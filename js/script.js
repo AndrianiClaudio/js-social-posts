@@ -4,14 +4,61 @@
 
 //     - Prendendo come riferimento il layout di esempio presente nell’html, stampiamo i post del nostro feed.
 // 	- Rendiamo il tasto “Mi Piace” cliccabile con incremento del counter dei likes.
+/**
+ * 
+ * @param {*} layout layout di stampa 
+ * STAMPA UN LAYOUT IN UN CONTAINER PRESO DALL'HTML
+ */
 function printPost(layout) {
     //acquisisco container dove stampare dati
     const container = document.getElementById('container');
     // console.log(container);
     container.innerHTML += layout;
 }
+/**
+ * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
+ */
+function init (post_array) {
+    for (let index = 0; index < post_array.length; index++) {
+        const post = post_array[index];//singolo post
+        const layout = //layout post
+        `
+        <div class="post">
+            <div class="post__header">
+            <div class="post-meta">
+            <div class="post-meta__icon">
+            <img class="profile-pic" src="${post['profile_image']}" alt="Phil Mangione">
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${post.author}</div>
+                        <div class="post-meta__time">${post.time}</div>
+                        </div>
+                </div>
+            </div>
+            <div class="post__text">${post['text']}</div>
+            <div class="post__image">
+            <img src="${post.image}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                <div class="likes__cta">
+                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                <span class="like-button__label">Mi Piace</span>
+                </a>
+                </div>
+                    <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${post['likes_counter']}</b> persone
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    `;
+                    printPost(layout);
+                }
+            }
 
-// creo array
+// TUTTI I MIEI POST
 const allPost = [
     {
         author: 'Phil Mangiones',
@@ -46,45 +93,7 @@ const allPost = [
         likes_counter: 95
     }
 ];
-
-//STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
-for (let index = 0; index < allPost.length; index++) {
-    const post = allPost[index];//singolo post
-    const layout = //layout post
-    `
-    <div class="post">
-        <div class="post__header">
-            <div class="post-meta">
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src="${post['profile_image']}" alt="Phil Mangione">
-                </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">${post.author}</div>
-                    <div class="post-meta__time">${post.time}</div>
-                </div>
-            </div>
-        </div>
-        <div class="post__text">${post['text']}</div>
-        <div class="post__image">
-            <img src="${post.image}" alt="">
-        </div>
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
-                </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${post['likes_counter']}</b> persone
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
-    printPost(layout);
-}
-
+// FINE TUTTI I MIEI POST
+init(allPost);
 // tasto mi piace cliccabile con incremento counter likes
-    // dobbiamo 'interagire' con il numero di like per poterlo incrementare
+// dobbiamo 'interagire' con il numero di like per poterlo incrementare
