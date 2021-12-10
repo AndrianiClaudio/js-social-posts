@@ -15,9 +15,15 @@ function printPost(layout) {
     // console.log(container);
     container.innerHTML += layout;
 }
+/**
+ * 
+ * @param {*} array array contente i post
+ */
 function createHTML (array) {
     for (let index = 0; index < array.length; index++) {
         const post = array[index];//singolo post
+        const authorFirstLetters = post.author.split(' ');
+        // console.log(authorFirstLetters);
         const layout = //layout post
         `
         <div class="post post">
@@ -34,7 +40,7 @@ function createHTML (array) {
             </div>
             <div class="post__text">${post['text']}</div>
             <div class="post__image">
-            <img src="${post.image}" alt="">
+            <img src="${post.image}" alt="${authorFirstLetters[0][0]}${authorFirstLetters[1][0]}">
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
@@ -54,6 +60,9 @@ function createHTML (array) {
         printPost(layout);
     }
 }
+/**
+ * cambia colore e incrementa/rimuove contatore like al click sul tag likes__cta
+ */
 function likes_counter_change () {
     //ottengo il bottone click per gestire il suo click
     const likes = document.querySelectorAll('.likes__cta');
@@ -88,7 +97,9 @@ function likes_counter_change () {
         })
     }
 }
-// 1. Formatta le date in formato italiano(gg / mm / aaaa)
+/**
+ * Formatta le date in formato italiano(gg / mm / aaaa)
+ */
 function dateTransformUSAtoITA() {
     for (let index = 0; index < allPost.length; index++) {
         const USAdata = allPost[index];
@@ -102,13 +113,14 @@ function dateTransformUSAtoITA() {
         USAdata['time'] = `${arr[0]}/${arr[1]}/${arr[2]}`;
     }
 }
+/**
+ * 
+ * @param {*} post_array array contentente tutti i post 
+ */
 function init (post_array) {
     createHTML(post_array);
     likes_counter_change();
 }
-/**
- * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
- */
 // --- TUTTI I MIEI POST
 const allPost = [
     {
@@ -146,8 +158,4 @@ const allPost = [
 ];
 // --- FINE TUTTI I MIEI POST
 dateTransformUSAtoITA();
-
 init(allPost); //stampa tutti i post presenti nell'array allPost
-
-// BONUS
-// 2. Gestire l’assenza dell’immagine profilo con un elemento di fallback che contiene le iniziali dell’utente(es.Luca Formicola > LF).
