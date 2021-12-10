@@ -57,14 +57,15 @@ function createHTML (array) {
 function likes_counter_change () {
     //ottengo il bottone click per gestire il suo click
     const likes = document.querySelectorAll('.likes__cta');
+    const labels = document.querySelectorAll('.like-button__label');
+    // console.log(this.childNodes.style.color);
+    const fa_thumbsUp = document.querySelectorAll('.like-button__icon.fas.fa-thumbs-up');
     for (let index = 0; index < likes.length; index++) {
         let clicked = false; //variabile che cambia in base ad ogni click
         const el = likes[index]; //bottone del post i-esimo
+        const like_counter = document.getElementById(`like-counter-${index}`);
         el.addEventListener('click', function () {
             //acquisisco tag html
-            const label = document.querySelector('.like-button__label');
-            const fa_thumbsUp = document.querySelector('.like-button__icon.fas.fa-thumbs-up');
-            const like_counter = document.getElementById(`like-counter-${index}`);
             //---fine acquisizione tag html
             if (!clicked) {
                 clicked = true; 
@@ -72,17 +73,17 @@ function likes_counter_change () {
                 like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
                 allPost[index].likes_counter += 1;
                 // modifica il colore della label 
-                label.style.color = 'blue';
-                fa_thumbsUp.style.color = 'blue';
-                // console.log(fa_thumbsUp);
+                labels[index].style.color = 'blue';
+                fa_thumbsUp[index].style.color = 'blue';
+                console.log(fa_thumbsUp[index]);
             } else { //click su click = annulla precedente mi piace
                 clicked = false; 
                 //modifica conteggio likes
                 like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
                 allPost[index].likes_counter -= 1;
                 // modifica il colore della label 
-                label.style.color = '#404040';
-                fa_thumbsUp.style.color = '#404040';
+                labels[index].style.color = '#404040';
+                fa_thumbsUp[index].style.color = '#404040';
             }
 
 
