@@ -116,33 +116,31 @@ const allPost = [
         likes_counter: 95
     }
 ];
+
+
+
+
+dateTransformUSAtoITA(allPost.time);
+
 // --- FINE TUTTI I MIEI POST
 init(allPost); //stampa tutti i post presenti nell'array allPost
 
-// //ottengo il bottone click per gestire il suo click
-// const likes = document.querySelectorAll('.likes__cta');
-// for (let index = 0; index < likes.length; index++) {
-//     let clicked = false;
-//     const el = likes[index];
-//     el.addEventListener('click', function () {
-//         const like_counter = document.getElementById(`like-counter-${index}`);
-//         if(!clicked) {
-//             clicked = true;
-//             //ottengo il numero di likes del post a cui si é cliccato
-//             // console.log(like_counter.innerHTML); 
-//             like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
-//             allPost[index].likes_counter += 1;
-//             console.log(allPost[index]);
-//             // console.log(like_counter.innerHTML); 
-//         } else { //click su click = annulla precedente mi piace
-//             like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
-//             allPost[index].likes_counter -= 1;
-//             console.log(allPost[index]);
-//         }
-//     })
-// }
-// console.log(likes);
+// BONUS
+// 1. Formattare le date in formato italiano(gg / mm / aaaa)
+// 2. Gestire l’assenza dell’immagine profilo con un elemento di fallback che contiene le iniziali dell’utente(es.Luca Formicola > LF).
+// 3. Al click su un pulsante “Mi Piace” di un post, incrementare il contatore di like al post e cambiare colore al testo del bottone.
 
-
-// tasto mi piace cliccabile con incremento counter likes
-// dobbiamo 'interagire' con il numero di like per poterlo incrementare
+function dateTransformUSAtoITA () {
+    for (let index = 0; index < allPost.length; index++) {
+        const USAdata = allPost[index];
+        let arr = USAdata.time.split('/');
+        // salva copia anno
+        array_change_backup = arr[0];
+        // scambia anno con mese
+        arr [0] = arr [1];
+        // scambia mese con anno
+        arr [1] = array_change_backup;
+        USAdata['time'] = `${arr[0]}/${arr[1]}/${arr[2]}`;
+        console.log(USAdata['time']);
+    }
+}
