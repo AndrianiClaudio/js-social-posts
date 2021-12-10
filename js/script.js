@@ -23,7 +23,7 @@ function init (post_array) {
         const post = post_array[index];//singolo post
         const layout = //layout post
         `
-        <div class="post">
+        <div class="post post">
             <div class="post__header">
             <div class="post-meta">
             <div class="post-meta__icon">
@@ -42,23 +42,22 @@ function init (post_array) {
             <div class="post__footer">
                 <div class="likes js-likes">
                 <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" href="#" data-postid="${index}">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                 <span class="like-button__label">Mi Piace</span>
                 </a>
                 </div>
                     <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${post['likes_counter']}</b> persone
+                    Piace a <b id="like-counter-${index}" class="js-likes-counter">${post['likes_counter']}</b> persone
                     </div>
-                    </div>
-                    </div>
-                    </div>
-                    `;
-                    printPost(layout);
-                }
-            }
-
-// TUTTI I MIEI POST
+                </div>
+            </div>
+        </div>
+        `;
+        printPost(layout);
+    }
+}
+// --- TUTTI I MIEI POST
 const allPost = [
     {
         author: 'Phil Mangiones',
@@ -93,7 +92,23 @@ const allPost = [
         likes_counter: 95
     }
 ];
-// FINE TUTTI I MIEI POST
-init(allPost);
+// --- FINE TUTTI I MIEI POST
+init(allPost); //stampa tutti i post presenti nell'array allPost
+
+//ottengo il bottone click per gestire il suo click
+const likes = document.querySelectorAll('.likes__cta');
+for (let index = 0; index < likes.length; index++) {
+    const el = likes[index];
+    // console.log(el);
+    el.addEventListener('click', function () {
+    // console.log('click');
+    const likes_counter = document.getElementById(`like-counter-${index}`);
+    // console.log(likes_counter);
+    // console.log(likes_counter.innerHTML);
+    })
+}
+// console.log(likes);
+
+
 // tasto mi piace cliccabile con incremento counter likes
 // dobbiamo 'interagire' con il numero di like per poterlo incrementare
