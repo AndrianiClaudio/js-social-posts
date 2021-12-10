@@ -75,7 +75,7 @@ function likes_counter_change () {
                 // modifica il colore della label 
                 labels[index].style.color = 'blue';
                 fa_thumbsUp[index].style.color = 'blue';
-                console.log(fa_thumbsUp[index]);
+                // console.log(fa_thumbsUp[index]);
             } else { //click su click = annulla precedente mi piace
                 clicked = false; 
                 //modifica conteggio likes
@@ -85,10 +85,6 @@ function likes_counter_change () {
                 labels[index].style.color = '#404040';
                 fa_thumbsUp[index].style.color = '#404040';
             }
-
-
-
-
         })
     }
 }
@@ -96,7 +92,7 @@ function likes_counter_change () {
 function dateTransformUSAtoITA() {
     for (let index = 0; index < allPost.length; index++) {
         const USAdata = allPost[index];
-        let arr = USAdata.time.split('/');
+        let arr = USAdata.time.split('-');
         // salva copia anno
         array_change_backup = arr[0];
         // scambia anno con mese
@@ -118,15 +114,15 @@ const allPost = [
     {
         author: 'Phil Mangiones',
         profile_image: 'https://unsplash.it/300/300?image=15',
-        time: '12/10/2021',
+        time: '12-10-2021',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut.Distinctio minima iusto.Ad ad maiores et sint voluptate recusandae architecto.Et nihil ullam aut alias.',
-        image: 'https://unsplash.it/600/300?image=171',
+        // image: 'https://unsplash.it/600/300?image=171',
         likes_counter: 80
     },
     {
         author: 'Claudio Andriani',
         profile_image: 'https://unsplash.it/300/300?image=25',
-        time: '12/9/2021',
+        time: '12-9-2021',
         text: '',
         image: 'https://unsplash.it/600/300?image=529',
         likes_counter: 100
@@ -134,7 +130,7 @@ const allPost = [
     {
         author: 'Phil Mangiones',
         profile_image: 'https://unsplash.it/300/300?image=167',
-        time: '12/8/2021',
+        time: '12-8-2021',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut.Distinctio minima iusto.Ad ad maiores et sint voluptate recusandae architecto.Et nihil ullam aut alias.',
         image: 'https://unsplash.it/600/300?image=942',
         likes_counter: 73
@@ -142,7 +138,7 @@ const allPost = [
     {
         author: 'Phil Mangiones',
         profile_image: 'https://unsplash.it/300/300?image=496',
-        time: '12/6/2021',
+        time: '12-6-2021',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut.Distinctio minima iusto.Ad ad maiores et sint voluptate recusandae architecto.Et nihil ullam aut alias.',
         image: 'https://unsplash.it/600/300?image=111',
         likes_counter: 95
@@ -155,4 +151,3 @@ init(allPost); //stampa tutti i post presenti nell'array allPost
 
 // BONUS
 // 2. Gestire l’assenza dell’immagine profilo con un elemento di fallback che contiene le iniziali dell’utente(es.Luca Formicola > LF).
-// 3. Al click su un pulsante “Mi Piace” di un post, incrementare il contatore di like al post e cambiare colore al testo del bottone.
