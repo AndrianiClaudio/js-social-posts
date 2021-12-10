@@ -61,26 +61,57 @@ function likes_counter_change () {
         let clicked = false; //variabile che cambia in base ad ogni click
         const el = likes[index]; //bottone del post i-esimo
         el.addEventListener('click', function () {
+            //acquisisco tag html
+            const label = document.querySelector('.like-button__label');
+            const fa_thumbsUp = document.querySelector('.like-button__icon.fas.fa-thumbs-up');
             const like_counter = document.getElementById(`like-counter-${index}`);
+            //---fine acquisizione tag html
             if (!clicked) {
                 clicked = true; 
+                //modifica conteggio likes
                 like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
-                allPost[index].likes_counter += 1; 
+                allPost[index].likes_counter += 1;
+                // modifica il colore della label 
+                label.style.color = 'blue';
+                fa_thumbsUp.style.color = 'blue';
+                // console.log(fa_thumbsUp);
             } else { //click su click = annulla precedente mi piace
                 clicked = false; 
+                //modifica conteggio likes
                 like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
                 allPost[index].likes_counter -= 1;
+                // modifica il colore della label 
+                label.style.color = '#404040';
+                fa_thumbsUp.style.color = '#404040';
             }
+
+
+
+
         })
     }
 }
-/**
- * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
- */
+// 1. Formatta le date in formato italiano(gg / mm / aaaa)
+function dateTransformUSAtoITA() {
+    for (let index = 0; index < allPost.length; index++) {
+        const USAdata = allPost[index];
+        let arr = USAdata.time.split('/');
+        // salva copia anno
+        array_change_backup = arr[0];
+        // scambia anno con mese
+        arr[0] = arr[1];
+        // scambia mese con anno
+        arr[1] = array_change_backup;
+        USAdata['time'] = `${arr[0]}/${arr[1]}/${arr[2]}`;
+    }
+}
 function init (post_array) {
     createHTML(post_array);
     likes_counter_change();
 }
+/**
+ * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
+ */
 // --- TUTTI I MIEI POST
 const allPost = [
     {
@@ -116,31 +147,11 @@ const allPost = [
         likes_counter: 95
     }
 ];
-
-
-
-
-dateTransformUSAtoITA(allPost.time);
-
 // --- FINE TUTTI I MIEI POST
+dateTransformUSAtoITA();
+
 init(allPost); //stampa tutti i post presenti nell'array allPost
 
 // BONUS
-// 1. Formattare le date in formato italiano(gg / mm / aaaa)
 // 2. Gestire l’assenza dell’immagine profilo con un elemento di fallback che contiene le iniziali dell’utente(es.Luca Formicola > LF).
 // 3. Al click su un pulsante “Mi Piace” di un post, incrementare il contatore di like al post e cambiare colore al testo del bottone.
-
-function dateTransformUSAtoITA () {
-    for (let index = 0; index < allPost.length; index++) {
-        const USAdata = allPost[index];
-        let arr = USAdata.time.split('/');
-        // salva copia anno
-        array_change_backup = arr[0];
-        // scambia anno con mese
-        arr [0] = arr [1];
-        // scambia mese con anno
-        arr [1] = array_change_backup;
-        USAdata['time'] = `${arr[0]}/${arr[1]}/${arr[2]}`;
-        console.log(USAdata['time']);
-    }
-}
