@@ -98,13 +98,23 @@ init(allPost); //stampa tutti i post presenti nell'array allPost
 //ottengo il bottone click per gestire il suo click
 const likes = document.querySelectorAll('.likes__cta');
 for (let index = 0; index < likes.length; index++) {
+    let clicked = false;
     const el = likes[index];
-    // console.log(el);
     el.addEventListener('click', function () {
-    // console.log('click');
-    const likes_counter = document.getElementById(`like-counter-${index}`);
-    // console.log(likes_counter);
-    // console.log(likes_counter.innerHTML);
+        const like_counter = document.getElementById(`like-counter-${index}`);
+        if(!clicked) {
+            clicked = true;
+            //ottengo il numero di likes del post a cui si é cliccato
+            // console.log(like_counter.innerHTML); 
+            like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
+            allPost[index].likes_counter += 1;
+            console.log(allPost[index]);
+            // console.log(like_counter.innerHTML); 
+        } else { //click su click = annulla precedente mi piace
+            like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
+            allPost[index].likes_counter -= 1;
+            console.log(allPost[index]);
+        }
     })
 }
 // console.log(likes);
