@@ -15,12 +15,9 @@ function printPost(layout) {
     // console.log(container);
     container.innerHTML += layout;
 }
-/**
- * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
- */
-function init (post_array) {
-    for (let index = 0; index < post_array.length; index++) {
-        const post = post_array[index];//singolo post
+function createHTML (array) {
+    for (let index = 0; index < array.length; index++) {
+        const post = array[index];//singolo post
         const layout = //layout post
         `
         <div class="post post">
@@ -56,6 +53,33 @@ function init (post_array) {
         `;
         printPost(layout);
     }
+}
+function likes_counter_change () {
+    //ottengo il bottone click per gestire il suo click
+    const likes = document.querySelectorAll('.likes__cta');
+    for (let index = 0; index < likes.length; index++) {
+        let clicked = false; //variabile che cambia in base ad ogni click
+        const el = likes[index]; //bottone del post i-esimo
+        el.addEventListener('click', function () {
+            const like_counter = document.getElementById(`like-counter-${index}`);
+            if (!clicked) {
+                clicked = true; 
+                like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
+                allPost[index].likes_counter += 1; 
+            } else { //click su click = annulla precedente mi piace
+                clicked = false; 
+                like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
+                allPost[index].likes_counter -= 1;
+            }
+        })
+    }
+}
+/**
+ * STAMPA DI TUTTI I POST PRESENTI NEL MIO ARRAY
+ */
+function init (post_array) {
+    createHTML(post_array);
+    likes_counter_change();
 }
 // --- TUTTI I MIEI POST
 const allPost = [
@@ -95,28 +119,28 @@ const allPost = [
 // --- FINE TUTTI I MIEI POST
 init(allPost); //stampa tutti i post presenti nell'array allPost
 
-//ottengo il bottone click per gestire il suo click
-const likes = document.querySelectorAll('.likes__cta');
-for (let index = 0; index < likes.length; index++) {
-    let clicked = false;
-    const el = likes[index];
-    el.addEventListener('click', function () {
-        const like_counter = document.getElementById(`like-counter-${index}`);
-        if(!clicked) {
-            clicked = true;
-            //ottengo il numero di likes del post a cui si é cliccato
-            // console.log(like_counter.innerHTML); 
-            like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
-            allPost[index].likes_counter += 1;
-            console.log(allPost[index]);
-            // console.log(like_counter.innerHTML); 
-        } else { //click su click = annulla precedente mi piace
-            like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
-            allPost[index].likes_counter -= 1;
-            console.log(allPost[index]);
-        }
-    })
-}
+// //ottengo il bottone click per gestire il suo click
+// const likes = document.querySelectorAll('.likes__cta');
+// for (let index = 0; index < likes.length; index++) {
+//     let clicked = false;
+//     const el = likes[index];
+//     el.addEventListener('click', function () {
+//         const like_counter = document.getElementById(`like-counter-${index}`);
+//         if(!clicked) {
+//             clicked = true;
+//             //ottengo il numero di likes del post a cui si é cliccato
+//             // console.log(like_counter.innerHTML); 
+//             like_counter.innerHTML = parseInt(like_counter.innerHTML) + 1;
+//             allPost[index].likes_counter += 1;
+//             console.log(allPost[index]);
+//             // console.log(like_counter.innerHTML); 
+//         } else { //click su click = annulla precedente mi piace
+//             like_counter.innerHTML = parseInt(like_counter.innerHTML) - 1;
+//             allPost[index].likes_counter -= 1;
+//             console.log(allPost[index]);
+//         }
+//     })
+// }
 // console.log(likes);
 
 
